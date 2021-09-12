@@ -13,21 +13,19 @@ import sys
 from geometry_msgs.msg import Twist
 
 #Define the method which contains the main functionality of the node.
-def controller(robot_frame, target_frame):
+def controller(turtlebot_frame, goal_frame):
   """
-  Controls a robot whose position is denoted by robot_frame,
+  Controls a turtlebot whose position is denoted by turtlebot_frame,
   to go to a position denoted by target_frame
   Inputs:
-  - robot_frame: the tf frame of the robot base.
-  - target_frame: the tf frame of the desired position.
+  - turtlebot_frame: the tf frame of the AR tag on your turtlebot
+  - target_frame: the tf frame of the target AR tag
   """
 
   ################################### YOUR CODE HERE ##############
 
   #Create a publisher and a tf buffer, which is primed with a tf listener
-  #TODO: replace 'INPUT TOPIC' with the correct name for the ROS topic on which
-  # the robot accepts velocity inputs.
-  pub = rospy.Publisher('INPUT TOPIC', Twist, queue_size=10)
+  pub = rospy.Publisher('INSTERT TOPIC HERE', Twist, queue_size=10)
   tfBuffer = tf2_ros.Buffer()
   tfListener = tf2_ros.TransformListener(tfBuffer)
   
@@ -40,12 +38,12 @@ def controller(robot_frame, target_frame):
   # Loop until the node is killed with Ctrl-C
   while not rospy.is_shutdown():
     try:
-      #TODO: Replace 'SOURCE FRAME' and 'TARGET FRAME' with the appropriate TF frame names.
-      trans = tfBuffer.lookup_transform('SOURCE FRAME', 'TARGET FRAME', rospy.Time())
+      trans = tfBuffer.lookup_transform(INSERT FRAME HERE, INSERT FRAME HERE, rospy.Time())
+
       # Process trans to get your state error
       # Generate a control command to send to the robot
 
-      control_command = #TODO: Generate this
+      control_command = # Generate this
 
       #################################### end your code ###############
 
@@ -70,4 +68,3 @@ if __name__ == '__main__':
     controller(sys.argv[1], sys.argv[2])
   except rospy.ROSInterruptException:
     pass
-
